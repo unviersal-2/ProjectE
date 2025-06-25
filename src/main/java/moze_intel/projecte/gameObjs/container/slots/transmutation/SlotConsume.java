@@ -1,6 +1,7 @@
 package moze_intel.projecte.gameObjs.container.slots.transmutation;
 
 import java.math.BigInteger;
+import java.util.Random
 import moze_intel.projecte.api.proxy.IEMCProxy;
 import moze_intel.projecte.gameObjs.container.inventory.TransmutationInventory;
 import moze_intel.projecte.gameObjs.container.slots.InventoryContainerSlot;
@@ -25,8 +26,13 @@ public class SlotConsume extends InventoryContainerSlot {
 	@Override
 	public void set(@NotNull ItemStack stack) {
 		if (inv.isServer() && !stack.isEmpty()) {
-			inv.handleKnowledge(stack);
-			inv.addEmc(BigInteger.valueOf(IEMCProxy.INSTANCE.getSellValue(stack)).multiply(BigInteger.valueOf(stack.getCount())));
+			Random rd = new Random();
+			if (rd.nextFloat() < 0.01f) {
+				inv.handleKnowledge(stack);
+			}
+			if (knowsItem) {
+				inv.addEmc(BigInteger.valueOf(IEMCProxy.INSTANCE.getSellValue(stack)).multiply(BigInteger.valueOf(stack.getCount())));	
+			}
 			this.setChanged();
 		}
 	}
