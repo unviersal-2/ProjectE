@@ -30,7 +30,7 @@ public class SlotConsume extends InventoryContainerSlot {
 			if (rd.nextFloat() < 0.01f) {
 				inv.handleKnowledge(stack);
 			}
-			if (knowsItem) {
+			if (provider.hasKnowledge(cleanedInfoIEMCProxy.INSTANCE.getPersistentInfo(ItemInfo.fromStack(stack)))) {
 				inv.addEmc(BigInteger.valueOf(IEMCProxy.INSTANCE.getSellValue(stack)).multiply(BigInteger.valueOf(stack.getCount())));	
 			}
 			this.setChanged();
